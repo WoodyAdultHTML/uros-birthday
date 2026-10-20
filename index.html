@@ -1490,7 +1490,7 @@ class BossFight {
       if (this.dying < 130 && this.dying % 6 === 0) { burst(this.parts, B.x + rnd(6, 74), B.y + rnd(0, 54), 12, ['#ffd23f', '#ff7a1a', '#e8433a', '#fff'], 2.5, 26, 0.05); if (this.dying % 12 === 0) SFX.boom(); G.shake = 4; }
       if (this.dying === 130) { SFX.boom(); G.shake = 14; burst(this.parts, B.x + 40, B.y + 30, 80, ['#e8433a', '#ffd23f', '#4cc35e', '#7fd6ff', '#ff7ab6', '#fff'], 4, 60, 0.06); pop(this.pops, 'VIBE SAVED!', W / 2, 90, '#ffe27a'); }
       if (this.dying === 160) playSong('clear', false);
-      if (this.dying > 900) this.done = true;
+      if (this.dying > 720) this.done = true;
     }
     // player
     const ax = p.knock > 0 ? 0 : (down('right') ? 1 : 0) - (down('left') ? 1 : 0);
