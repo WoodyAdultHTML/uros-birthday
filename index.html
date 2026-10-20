@@ -1388,12 +1388,11 @@ class Blaster {
     drawOffice();
 
     if (this.bt === 0 && !(this.appear > 0 && (this.appear >> 2) & 1)) for (const e of this.en) if (e.alive) this.drawEnemy(e);
-    // Uros shoots red bullets with a pointed tip and a short trail
+    // Uros shoots red pixel squares with a short trail of smaller squares
     for (const b of this.bullets) {
-      const x = b.x - 1, y = b.y;
-      R(x + 1, y + 12, 2, 3, 'rgba(232,67,58,.5)'); R(x + 1, y + 16, 2, 2, 'rgba(232,67,58,.25)');
-      R(x + 1, y - 1, 2, 1, '#4a0a0e'); R(x, y, 4, 11, '#4a0a0e');
-      R(x + 1, y, 2, 1, '#ffe0d8'); R(x + 1, y + 1, 2, 7, '#e8433a'); R(x + 1, y + 1, 1, 7, '#ff9a8a'); R(x + 1, y + 8, 2, 2, '#a8241e');
+      const x = b.x - 2, y = b.y;
+      R(x + 1, y + 9, 3, 3, 'rgba(232,67,58,.5)'); R(x + 2, y + 14, 2, 2, 'rgba(232,67,58,.25)');
+      R(x - 1, y - 1, 7, 7, '#4a0a0e'); R(x, y, 5, 5, '#e8433a'); R(x, y, 2, 2, '#ff9a8a');
     }
     for (const b of this.ebul) { const z = (G.frame >> 2) & 1; R(b.x + z, b.y, 2, 2, '#ff5a4a'); R(b.x + 1 - z, b.y + 2, 2, 2, '#ff5a4a'); R(b.x + z, b.y + 4, 2, 2, '#ffd23f'); }
     if (!(this.inv > 0 && (this.inv >> 2) & 1) && !this.retry) {
