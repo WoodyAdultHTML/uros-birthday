@@ -146,7 +146,6 @@ body{margin:0}
   <div id="pad" hidden>
     <div id="dpad" aria-label="Direction pad"><span class="h"></span><span class="v"></span><span class="c"></span>
       <i class="u"></i><i class="d"></i><i class="l"></i><i class="r"></i></div>
-    <div id="mid"><button type="button" data-k="start" aria-label="Start"></button><span class="plabel">START</span></div>
     <div id="ab"><button type="button" data-k="a" aria-label="A"></button><span class="plabel">A</span></div>
   </div>
 </div>
@@ -1792,7 +1791,7 @@ class Ending {
       g.globalAlpha = 1;
     }
     if (t >= FIN.BURST) drawSay(W / 2, 174 - uy);
-    if (t > FIN.PARTY + 150 && (G.frame >> 5) & 1) text(isTouch ? 'TAP TO PLAY AGAIN' : 'PRESS SPACE TO PLAY AGAIN', W / 2, 228, { align: 'center', color: '#ffffff' });
+    if (t > FIN.PARTY + 150 && (G.frame >> 5) & 1) text(isTouch ? 'PRESS A TO PLAY AGAIN' : 'PRESS SPACE TO PLAY AGAIN', W / 2, 228, { align: 'center', color: '#ffffff' });
     if (t < 40) R(0, 0, W, H, 'rgba(0,0,0,' + (1 - t / 40) + ')');
   }
 }
@@ -1945,7 +1944,7 @@ function drawTitle() {
     const opts = ['NEW GAME', 'CONTINUE: ' + LEVELS[G.progress].name.join(' ')];
     opts.forEach((o, i) => text(o, W / 2, 204 + i * 12, { align: 'center', color: G.sel === i ? '#ffd23f' : '#d8cdf0' }));
     g.drawImage(HEART, W / 2 - opts[G.sel].length * 4 - 12, 205 + G.sel * 12);
-  } else if ((G.frame >> 5) & 1) text(isTouch ? 'PRESS START' : 'PRESS SPACE', W / 2, 212, { align: 'center', color: '#ffffff' });
+  } else if ((G.frame >> 5) & 1) text(isTouch ? 'PRESS A' : 'PRESS SPACE', W / 2, 212, { align: 'center', color: '#ffffff' });
 }
 function introRow(entries, cy) {
   const gap = 16, total = entries.reduce((a, e) => a + e.w, 0) + gap * (entries.length - 1);
@@ -2033,7 +2032,7 @@ function render() {
     case 'boot': R(0, 0, W, H, '#000'); break;
     case 'title': drawTitle(); break;
     case 'intro': drawIntro(); break;
-    case 'play': G.level.draw(); if (G.paused) { R(0, 0, W, H, 'rgba(0,0,0,.55)'); banner('PAUSED', isTouch ? 'PRESS START' : 'PRESS ESC', '#ffffff'); } break;
+    case 'play': G.level.draw(); if (G.paused) { R(0, 0, W, H, 'rgba(0,0,0,.55)'); banner('PAUSED', isTouch ? 'TAP TO RESUME' : 'PRESS ESC', '#ffffff'); } break;
     case 'clear': G.level.draw(); banner('LEVEL CLEAR!', 'SCORE ' + String(G.score).padStart(6, '0'), '#ffd23f'); break;
     case 'fail': G.level.draw(); R(0, 0, W, H, 'rgba(0,0,0,.4)'); banner(G.level.failed, 'TRY AGAIN!', '#ff7ab6'); break;
     case 'outro': G.level.draw(); R(0, 0, W, H, 'rgba(0,0,0,' + Math.min(1, G.t / 60) + ')'); break;
