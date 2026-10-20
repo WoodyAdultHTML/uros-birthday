@@ -1680,8 +1680,9 @@ class Ending {
     }
     if (t === FIN.PARTY) { G.sayCool = 0; say('PARTY TIME!'); }
     if (t > FIN.PARTY && t % 45 === 0) { burst(this.parts, rnd(30, 226), rnd(60, 110), 26, [['#ffd23f', '#fff'], ['#ff7ab6', '#fff'], ['#7fd6ff', '#fff'], ['#6cf08a', '#fff']][Math.floor(rnd(0, 4))], 2.2, 34, 0.04); SFX.pop(); }
-    if (t === FIN.PARTY + 120) { G.sayCool = 0; say('OH YEAAAH!'); }
-    if (t > FIN.PARTY + 200 && t % 220 === 0) say(['OH YEAAAH!', "LET'S DANCE!", 'BEST BIRTHDAY EVER!', 'OH YEAAAH!']);
+    if (t === FIN.PARTY + 120) { G.sayCool = 0; say('OH YEAH!'); }
+    // party lines rotate in order, so no line repeats back to back
+    if (t > FIN.PARTY + 200 && t % 300 === 0) { const lines = ["LET'S DANCE!", 'BEST BIRTHDAY EVER!', 'LEVEL UP!', 'OH YEAH!']; say(lines[(t / 300 | 0) % lines.length]); }
     if (t > FIN.PARTY + 150 && (hit('a') || hit('start') || G.tapNow)) toTitle();
   }
   draw() {
