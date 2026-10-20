@@ -1017,7 +1017,6 @@ class Platformer {
     this.sky.draw(cx); this.city.draw(cx);
     R(0, 0, W, 200, 'rgba(214,232,246,.5)');
     R(0, 200, W, 40, '#3a3f66');
-    for (const dd of this.decor) { const sx = dd.x - cx; if (sx > -40 && sx < W + 10) this.drawDecor(dd, sx); }
     // parking sign + Uros's car
     const d = this.deploy, dx = d.x - cx;
     if (dx > -80 && dx < W + 80) {
