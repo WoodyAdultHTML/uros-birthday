@@ -2064,7 +2064,10 @@ if (standalone) btnFull.hidden = true;
 if (hasManifest && 'serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
 addEventListener('beforeinstallprompt', e => { e.preventDefault(); installEvt = e; document.getElementById('instGo').hidden = false; });
 function maybeOfferInstall() {
-  if (!isTouch || standalone || !hasManifest || store.get('uros-install-skip', false)) return;
+  // show on every new visit from a phone; "play here anyway" only hides it for this tab
+  const mobile = isTouch || /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+  let skipped = false; try { skipped = sessionStorage.getItem('uros-install-skip') === '1'; } catch (e) {}
+  if (!mobile || standalone || !hasManifest || skipped) return;
   const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   const icon = document.querySelector('link[rel="icon"]');
   if (icon) document.getElementById('instIcon').src = icon.href;
@@ -2074,7 +2077,7 @@ function maybeOfferInstall() {
   document.getElementById('instSteps').innerHTML = steps.map(t => '<li><span>' + t + '</span></li>').join('');
   installEl.hidden = false;
 }
-document.getElementById('instSkip').addEventListener('click', () => { installEl.hidden = true; store.set('uros-install-skip', true); });
+document.getElementById('instSkip').addEventListener('click', () => { installEl.hidden = true; try { sessionStorage.setItem('uros-install-skip', '1'); } catch (e) {} });
 document.getElementById('instGo').addEventListener('click', async () => {
   if (!installEvt) return;
   installEvt.prompt();
